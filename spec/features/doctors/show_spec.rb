@@ -82,7 +82,7 @@ RSpec.describe 'Doctor Show Page' do
           expect(page).to_not have_content(doctor_path(@patient_1.name))
 
           visit doctor_path(@doctor_3.id)
-          
+
           expect(page).to have_content(@patient_1.name)
         end
       end
