@@ -6,5 +6,6 @@
 <% @patients.each do |patient| %>
   <div id="doctor_patients_<%= patient.id %>">
     <%= patient.name %>
+    <%= button_to "Delete #{patient.name}", method: :delete %>
   </div>
 <% end %>
