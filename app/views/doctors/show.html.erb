@@ -1,0 +1,11 @@
+<h2>DR. <%= @doctor.name %>'s Information Page </h2>
+<p>Specialty: <%= @doctor.specialty %></p>
+<p>Alma Matter: <%= @doctor.university %></p>
+<p>Practices Medicine at <%= @hospital.name %></p>
+
+<% @patients.each do |patient| %>
+  <div id="doctor_patients_<%= patient.id %>">
+    <%= patient.name %>
+    <%= button_to "Delete #{patient.name}", doctor_patient_path(@doctor.id, patient.id), method: :delete %>
+  </div>
+<% end %>
