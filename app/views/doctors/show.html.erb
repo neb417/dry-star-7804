@@ -3,8 +3,8 @@
 <p>Alma Matter: <%= @doctor.university %></p>
 <p>Practices Medicine at <%= @hospital.name %></p>
 
-<div id="doctor_patients_<%= @doctor.id %>">
-  <% @patients.each do |patient| %>
+<% @patients.each do |patient| %>
+  <div id="doctor_patients_<%= patient.id %>">
     <%= patient.name %>
-  <% end %>
-</div>
+  </div>
+<% end %>

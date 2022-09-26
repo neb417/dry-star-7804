@@ -44,11 +44,46 @@ RSpec.describe 'Doctor Show Page' do
       it 'all of the doctor patients are listed' do
         visit doctor_path(@doctor_3)
 
-        within("#doctor_patients_#{@doctor_3.id}") do
+        @doctor_3.patients.each do |patient|
+          within("#doctor_patients_#{patient.id}") do
+            expect(page).to have_content(patient.name)
+          end
+        end
+
+        expect(page).to have_content(@patient_1.name)
+        expect(page).to have_content(@patient_4.name)
+        expect(page).to_not have_content(@patient_3.name)
+        expect(page).to_not have_content(@patient_2.name)
+      end
+
+      describe 'each patients name, I see a button to remove that patient from that doctors caseload' do
+        it 'has a delete button next to patient' do
+          visit doctor_path(@doctor_1.id)
+
+          expect(page).to have_button("Delete #{@patient_1.name}")
+          expect(page).to have_button("Delete #{@patient_2.name}")
+          expect(page).to have_button("Delete #{@patient_4.name}")
+          expect(page).to_not have_button("Delete #{@patient_3.name}")
+        end
+
+        it 'clicking button take visitor back to doctor show page' do
+          visit doctor_path(@doctor_1.id)
+
+          click_button "Delete #{@patient_1.name}"
+
+          expect(current_path).to eq(doctor_path(@doctor_1.id))
+        end
+
+        it 'after button is clicked patient is removed from doctor show page' do
+          visit doctor_path(@doctor_1.id)
+
+          click_button "Delete #{@patient_1.name}"
+
+          expect(page).to_not have_content(doctor_path(@patient_1.name))
+
+          visit doctor_path(@doctor_3.id)
+          
           expect(page).to have_content(@patient_1.name)
-          expect(page).to have_content(@patient_4.name)
-          expect(page).to_not have_content(@patient_3.name)
-          expect(page).to_not have_content(@patient_2.name)
         end
       end
     end
