@@ -26,7 +26,7 @@ RSpec.describe Patient, type: :model do
 
     it '#adult_patients' do
       patients = Patient.all
-      expect(patients.adult_patients).to eq([@patien1, @patient_2, @patient_3])
+      expect(patients.adult_patients).to match_array([@patient_1, @patient_2, @patient_3])
     end
   end
 end
