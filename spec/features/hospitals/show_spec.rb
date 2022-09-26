@@ -22,14 +22,14 @@ RSpec.describe 'Hospital Show Page' do
 
   describe 'As a visitor' do
     describe 'visiting the Hospital Show Page' do
-      it 'displays hospital name' do
+      xit 'displays hospital name' do
         visit hospital_path(@hospital_1.id)
 
         expect(page).to have_content(@hospital_1.name)
         expect(page).to_not have_content(@hospital_2.name)
       end
 
-      it 'displays the doctor names that practice at the hospital' do
+     xit 'displays the doctor names that practice at the hospital' do
         visit hospital_path(@hospital_1.id)
 
         expect(page).to have_content(@doctor_1.name)
@@ -38,7 +38,7 @@ RSpec.describe 'Hospital Show Page' do
         expect(page).to_not have_content(@doctor_4.name)
       end
 
-      it 'displays number of patients next to doctor name' do
+      xit 'displays number of patients next to doctor name' do
         visit hospital_path(@hospital_1.id)
 
         within("#doctor_#{@doctor_1.id}") do
@@ -50,7 +50,7 @@ RSpec.describe 'Hospital Show Page' do
         end
 
         it 'displays doctors by number of patients descending' do
-        visit hospital_path(@hospital_1.id)
+          visit hospital_path(@hospital_1.id)
 
           expect(@doctor_2).to appear_before(@doctor_1)
         end
