@@ -2,3 +2,9 @@
 <p>Specialty: <%= @doctor.specialty %></p>
 <p>Alma Matter: <%= @doctor.university %></p>
 <p>Practices Medicine at <%= @hospital.name %></p>
+
+<div id="doctor_patients_<%= @doctor.id %>">
+  <% @patients.each do |patient| %>
+    <%= patient.name %>
+  <% end %>
+</div>
