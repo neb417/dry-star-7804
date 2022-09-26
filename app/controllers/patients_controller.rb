@@ -1,7 +1,8 @@
 class PatientsController < ApplicationController
 
   def index
-    @patients = Patient.all
+    patients = Patient.all
+    @adult_patients = patients.adult_patients
   end
 
   def destroy
