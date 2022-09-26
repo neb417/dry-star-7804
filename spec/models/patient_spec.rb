@@ -28,5 +28,11 @@ RSpec.describe Patient, type: :model do
       patients = Patient.all
       expect(patients.adult_patients).to match_array([@patient_1, @patient_2, @patient_3])
     end
+
+    it 'orders #adult_patients' do
+      patients = Patient.all
+
+      expect(patients.adult_patients).to eq([@patient_2, @patient_1, @patient_3])
+    end
   end
 end

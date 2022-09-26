@@ -4,5 +4,6 @@ class Patient < ApplicationRecord
 
   def self.adult_patients
     where('patients.age >= ?', 18)
+    # .order
   end
 end
