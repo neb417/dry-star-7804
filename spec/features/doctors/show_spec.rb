@@ -23,102 +23,32 @@ RSpec.describe 'Doctor Show Page' do
   describe 'As a visitor' do
     describe 'visiting the Doctor Show Page' do
       it 'all of the Doctor attributes are seen' do
-        visit doctor_path
-        
-        within("#doctor_#{@doctor_1.id}") do
-          expect(page).to have_content(@doctor_1.name)
-          expect(page).to have_content(@doctor_1.specialty)
-          expect(page).to have_content(@doctor_1.university)
+        visit doctor_path(@doctor_1.id)
 
-          expect(page).to_not have_content(@doctor_2.name)
-          expect(page).to_not have_content(@doctor_3.specialty)
-          expect(page).to_not have_content(@doctor_4.university)
-        end
+        expect(page).to have_content(@doctor_1.name)
+        expect(page).to have_content(@doctor_1.specialty)
+        expect(page).to have_content(@doctor_1.university)
 
-        within("#doctor_#{@doctor_2.id}") do
-          expect(page).to have_content(@doctor_2.name)
-          expect(page).to have_content(@doctor_2.specialty)
-          expect(page).to have_content(@doctor_2.university)
-
-          expect(page).to_not have_content(@doctor_1.name)
-          expect(page).to_not have_content(@doctor_3.specialty)
-          expect(page).to_not have_content(@doctor_4.university)
-        end
-
-        within("#doctor_#{@doctor_3.id}") do
-          expect(page).to have_content(@doctor_3.name)
-          expect(page).to have_content(@doctor_3.specialty)
-          expect(page).to have_content(@doctor_3.university)
-
-          expect(page).to_not have_content(@doctor_1.name)
-          expect(page).to_not have_content(@doctor_2.specialty)
-          expect(page).to_not have_content(@doctor_4.university)
-        end
-
-        within("#doctor_#{@doctor_4.id}") do
-          expect(page).to have_content(@doctor_4.name)
-          expect(page).to have_content(@doctor_4.specialty)
-          expect(page).to have_content(@doctor_4.university)
-
-          expect(page).to_not have_content(@doctor_1.name)
-          expect(page).to_not have_content(@doctor_3.specialty)
-          expect(page).to_not have_content(@doctor_2.university)
-        end
+        expect(page).to_not have_content(@doctor_2.name)
+        expect(page).to_not have_content(@doctor_3.name)
+        expect(page).to_not have_content(@doctor_4.university)
       end
 
       it 'the hospital where the doctor works is listed with doctor information' do
-        visit doctor_path
+        visit doctor_path(@doctor_2.id)
 
-        within("#doctor_#{@doctor_1.id}") do
-          expect(page).to have_content(@hospital_1.name)
-          expect(page).to_not have_content(@hospital_2.name)
-        end
-
-        within("#doctor_#{@doctor_2.id}") do
-          expect(page).to have_content(@hospital_1.name)
-          expect(page).to_not have_content(@hospital_2.name)
-        end
-
-        within("#doctor_#{@doctor_3.id}") do
-          expect(page).to_not have_content(@hospital_1.name)
-          expect(page).to have_content(@hospital_2.name)
-        end
-
-        within("#doctor_#{@doctor_4.id}") do
-          expect(page).to_not have_content(@hospital_1.name)
-          expect(page).to have_content(@hospital_2.name)
-        end
+        expect(page).to have_content(@hospital_1.name)
+        expect(page).to_not have_content(@hospital_2.name)
       end
 
       it 'all of the doctor patients are listed' do
-        visit doctor_path
+        visit doctor_path(@doctor_3)
 
-        within("#doctor_#{@doctor_1.id}") do
-          expect(page).to have_content(@patient_1.name)
-          expect(page).to have_content(@patient_2.name)
-          expect(page).to have_content(@patient_4.name)
-          expect(page).to_not have_content(@patient_3.name)
-        end
-
-        within("#doctor_#{@doctor_2.id}") do
-          expect(page).to have_content(@patient_3.name)
-          expect(page).to have_content(@patient_4.name)
-          expect(page).to_not have_content(@patient_1.name)
-          expect(page).to_not have_content(@patient_2.name)
-        end
-
-        within("#doctor_#{@doctor_3.id}") do
+        within("#doctor_patients_#{@doctor_3.id}") do
           expect(page).to have_content(@patient_1.name)
           expect(page).to have_content(@patient_4.name)
           expect(page).to_not have_content(@patient_3.name)
           expect(page).to_not have_content(@patient_2.name)
-        end
-
-        within("#doctor_#{@doctor_4.id}") do
-          expect(page).to_not have_content(@patient_1.name)
-          expect(page).to_not have_content(@patient_2.name)
-          expect(page).to_not have_content(@patient_3.name)
-          expect(page).to_not have_content(@patient_4.name)
         end
       end
     end
